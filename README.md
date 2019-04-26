@@ -23,3 +23,6 @@ Download the repository to your PC
 1. Start Jupyter notebook,
 2. Navigate to the downloaded Auto-BEL master folder, 
 3. Open the jupyternote file [Auto-BEL_thickness_coeff.ipynb](https://github.com/sdyinzhen/Auto-BEL/blob/master/Auto-BEL_thickness_coeff.ipynb), and follow the steps in the notebook to run the BEL. 
+
+### Licensing
+This repository is released under the MIT License.

@@ -7,7 +7,7 @@
 To run the Auto-BEL, the following dependencies must be met:
 * [Jupyter](http://jupyter.org/) 
 * [Python 3.7](https://www.python.org/) 
-They can be installed together via [Anaconda](https://www.anaconda.com/).
+* They can be installed together via [Anaconda](https://www.anaconda.com/).
 
 Once installed, jupyter can be started from the command line with
 

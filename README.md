@@ -2,9 +2,6 @@
 
 <p> This repository contains the python code of automated BEL for geological model unceratinty quantification using well borehole data.
 
-For illustrative purposes, a [Jupyter](http://jupyter.org/) tutorial is prepared together with the code, using the application to thickness coefficient model as an example. 
-
-
 #### Installation
 
 To run the Auto-BEL, the following dependencies must be met:
@@ -18,10 +15,10 @@ Once installed, jupyter can be started from the command line with
 
 ### Runing the Auto BEL
 
-Download the repository to your PC
+Download this repository to your PC
 
 1. Start Jupyter notebook,
-2. Navigate to the downloaded Auto-BEL master folder, 
+2. Navigate to the downloaded AutoBEL_Python master folder, 
 3. Open the jupyternote file [Control_Pannel.ipynb](https://github.com/sdyinzhen/AutoBEL_Python/blob/master/Control_Pannel.ipynb), and follow the steps in the notebook to run the BEL. 
 
 ### Licensing

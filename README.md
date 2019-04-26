@@ -16,7 +16,7 @@ Once installed, jupyter can be started from the command line with
 
 	jupyter notebook
 
-### Runing the tutorial
+### Runing the Auto BEL
 
 Download the repository to your PC
 

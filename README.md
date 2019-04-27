@@ -2,7 +2,7 @@
 
 <p> This repository contains the python code of automated BEL for geological model unceratinty quantification using well borehole data.
 
-#### Installation
+### Installation
 
 To run the Auto-BEL, the following dependencies must be met:
 * [Jupyter](http://jupyter.org/) 
@@ -13,7 +13,7 @@ Once installed, jupyter can be started from the command line with
 
 	jupyter notebook
 	
-### Structure of the AutoBEL setup
+### Structure of the Auto BEL setup
 <img src="source_code/img/dataset_struture.jpg" width="500" height="400">
 
 

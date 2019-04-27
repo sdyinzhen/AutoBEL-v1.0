@@ -21,5 +21,8 @@ Download this repository to your PC
 2. Navigate to the downloaded AutoBEL_Python master folder, 
 3. Open the jupyter notebook file [Control_Pannel.ipynb](https://github.com/sdyinzhen/AutoBEL_Python/blob/master/Control_Pannel.ipynb), and follow the steps in the notebook to run BEL. 
 
+### Tutorial Video
+For illustration, a [tutorial video](https://youtu.be/_jh6GbW15ck) is provided. 
+
 ### Licensing
 This repository is released under the MIT License.

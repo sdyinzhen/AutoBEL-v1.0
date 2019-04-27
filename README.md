@@ -12,6 +12,9 @@ To run the Auto-BEL, the following dependencies must be met:
 Once installed, jupyter can be started from the command line with
 
 	jupyter notebook
+	
+### Structure of the AutoBEL setup
+<img src="source_code/img/dataset_struture.jpg" alt="Drawing" style="width: 200px;"/>
 
 ### Runing the Auto BEL
 

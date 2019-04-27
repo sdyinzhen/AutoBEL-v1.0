@@ -14,7 +14,8 @@ Once installed, jupyter can be started from the command line with
 	jupyter notebook
 	
 ### Structure of the AutoBEL setup
-<img src="source_code/img/dataset_struture.jpg" alt="Drawing" style="width: 100px;"/>
+<img src="source_code/img/dataset_struture.jpg" width="500" height="400">
+
 
 ### Runing the Auto BEL
 

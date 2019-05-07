@@ -8,7 +8,7 @@ from sklearn.decomposition import PCA
 
 from grdecl_read_plot import *
 from combine_m_sampls import *
-from signed_distance_functions import *
+#from signed_distance_functions import *
 from giip_cal import *
 from scree_plot import scree_plot
 from evd_fast import *

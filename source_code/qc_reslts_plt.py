@@ -20,7 +20,7 @@ def m_ensampl_plt(m_smpls_pos, m_smpls_pri, layernum, i_dim, j_dim, k_dim, dobs)
         Pareto Plot for SA
     '''
 
-    plt.figure(figsize=(11.5,6.2))
+    plt.figure(figsize=(12.5,6.2))
     
     plt.subplot(221)
     m_ens_mean = np.mean(m_smpls_pos[:,j_dim*i_dim*(layernum-1):j_dim*i_dim*layernum], axis=0)
@@ -35,7 +35,7 @@ def m_ensampl_plt(m_smpls_pos, m_smpls_pri, layernum, i_dim, j_dim, k_dim, dobs)
                 c= dobs[3, len(dobs[0,:])*(layernum-1):len(dobs[0,:])*(layernum)], \
                 cmap='jet', edgecolors=(0, 0, 0), linewidth =0.9, s=80, vmax=np.max(m_ens_mean), vmin=np.min(m_ens_mean))
     plt.tick_params(labelsize=13)
-    plt.title('Ensemble Mean of Posterior', fontsize = 15)
+    plt.title('Ensemble Mean of Posterior', fontsize = 15, style='italic')
 
     plt.subplot(222)
     m_ens_mean_pri = np.mean(m_smpls_pri[:,j_dim*i_dim*(layernum-1):j_dim*i_dim*layernum], axis=0)
@@ -52,7 +52,7 @@ def m_ensampl_plt(m_smpls_pos, m_smpls_pri, layernum, i_dim, j_dim, k_dim, dobs)
                 cmap='jet', edgecolors=(0, 0, 0), linewidth =0.9, s=80, \
                 vmax=np.max(m_ens_mean), vmin=np.min(m_ens_mean))
     plt.tick_params(labelsize=13)
-    plt.title('Ensemble Mean of Prior', fontsize = 15)
+    plt.title('Ensemble Mean of Prior', fontsize = 15, style='italic')
   
     
     plt.subplot(223)
@@ -64,7 +64,7 @@ def m_ensampl_plt(m_smpls_pos, m_smpls_pri, layernum, i_dim, j_dim, k_dim, dobs)
                 dobs[1, len(dobs[0,:])*(layernum-1):len(dobs[0,:])*(layernum)]*250, \
                 color='white', edgecolors=(0, 0, 0), linewidth =1.2, s=80, alpha=0.7)
     plt.tick_params(labelsize=13)
-    plt.title('Ensemble Variance of Posterior', fontsize = 15)
+    plt.title('Ensemble Variance of Posterior', fontsize = 15, style='italic')
     
 
     plt.subplot(224)
@@ -76,15 +76,14 @@ def m_ensampl_plt(m_smpls_pos, m_smpls_pri, layernum, i_dim, j_dim, k_dim, dobs)
                 dobs[1, len(dobs[0,:])*(layernum-1):len(dobs[0,:])*(layernum)]*250, \
                 color='white', edgecolors=(0, 0, 0), linewidth =1.2, s=80, alpha=0.7)
     plt.tick_params(labelsize=13)
-    plt.title('Ensemble Variance of Prior', fontsize = 15)    
+    plt.title('Ensemble Variance of Prior', fontsize = 15, style='italic')    
     
     plt.tight_layout()
-	
+    
     return 
 
 
-
-def m_sampls_plt(m_smpls, first_realnum, last_realnum, pstep, layernum, m_type, i_dim, j_dim, k_dim):
+def m_sampls_plt(m_smpls,m_type, i_dim, j_dim, k_dim):
     '''
     Plot the 
     Args:
@@ -98,36 +97,33 @@ def m_sampls_plt(m_smpls, first_realnum, last_realnum, pstep, layernum, m_type, 
     Output:
         Pareto Plot for SA
     '''
-    plot_num = int((last_realnum-first_realnum+1)/pstep)    
-    fig_row = int((plot_num+3)/4)
-    fig=plt.figure(figsize=(fig_row*6,16))
+    plot_num = 12    
+    fig_row = 3
+    layernum = 1
+    fig=plt.figure(figsize=(15,14))
     count = 1
     if m_type == 'facies':
         
-        for realnum in tqdm(range(first_realnum, last_realnum, pstep)):
+        for realnum in tqdm(range(12)):
             grid_data = plt.imshow(m_smpls[realnum, :].reshape(k_dim,j_dim,i_dim))
             plot=fig.add_subplot(fig_row, 4, count)
             count = count+1
-            #plot=fig.add_subplot(3,plot_num/3,count)
-            #prop_mean = format((1-np.mean(grid_data)/3-0.01)*100,'.2f')
-            #plot.set_xlabel('Sand Fraction = ' + str(prop_mean)+'%', fontsize = 14)
-            #plt.imshow(grid_data,cmap='viridis_r',extent=[0,2500,0,2500]) # for facies
             prop_mean = format(np.mean(grid_data),'.4f')
             plt.imshow(grid_data[layernum-1],cmap='viridis_r',extent=[0,50000,0,25000]) # for poro
             plt.xticks(fontsize = 13)
             plt.yticks(fontsize = 13)
-            #plot.set_xlabel('whole field fac mean= ' + str(prop_mean), fontsize = 14)
+            plt.title('posterior model sample #'+str(count-1), fontsize=14, style='italic')
             plot.set_xlabel('Realization No. ' + str(realnum), fontsize = 14)
        
     else:
-        for realnum in tqdm(range(first_realnum, last_realnum, pstep)):
+        for realnum in tqdm(range(12)):
             grid_data = m_smpls[realnum,:].reshape(k_dim, j_dim, i_dim)      
             plot=fig.add_subplot(fig_row, 4, count)
             count = count+1
             #plot=fig.add_subplot(3,plot_num/3,count)
             prop_mean = format(np.mean(grid_data),'.4f')
             plot.set_xlabel('whole field "' + m_type + '" = ' + str(prop_mean), fontsize = 14)
-            #plt.imshow(grid_data,cmap='viridis_r',extent=[0,2500,0,2500]) # for facies
+            plt.title('posterior model sample #'+str(count-1), fontsize=14, style='italic')
             if m_type == 'Sw':
                 plt.imshow(grid_data[layernum-1],cmap='jet_r',extent=[0,50000,0,25000], \
                            vmin=np.min(grid_data[layernum-1]),vmax=np.max(grid_data[layernum-1])*1.05)
@@ -138,7 +134,7 @@ def m_sampls_plt(m_smpls, first_realnum, last_realnum, pstep, layernum, m_type, 
             plt.yticks(fontsize = 13)
             #print(realnum)
     
-#     plt.colorbar(fraction = 0.02)     
+    plt.colorbar(fraction = 0.03)     
     plt.subplots_adjust(top=0.55, bottom=0.08, left=0.10, right=0.95, hspace=0.15,
                     wspace=0.35)
     return

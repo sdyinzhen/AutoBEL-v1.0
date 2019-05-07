@@ -27,7 +27,7 @@ def dgsa_plt(SA_dataframe, plt_paranum):
 
     #############Define the colour bar #########
     pltdata = SA_dataframe.values[:plt_paranum,0]
-	
+    
     mask= pltdata <= 1
     ### red
     colors = np.asarray([[1, 0, 0, 1.0]]*plt_paranum)
@@ -48,9 +48,8 @@ def dgsa_plt(SA_dataframe, plt_paranum):
     plt.xticks(np.arange(plt_paranum), SA_dataframe.index[:plt_paranum], fontsize=13, rotation =70)
     plt.yticks(fontsize=16)
     plt.axhline(y=1, linestyle = '--', c ='k')
-    plt.ylabel('DGSA measurements', fontsize=16)
-    plt.title('Global Sensitivity anlaysis-DGSA', fontsize=18, loc='left', weight='bold')
+    plt.ylabel('sensitivity to data', fontsize=16)
+    plt.title('Global Sensitivity of model to data (calculated by DGSA)', fontsize=18, loc='left', style='italic')
     plt.xlabel('model parameters', fontsize=16)
-
 	
 	

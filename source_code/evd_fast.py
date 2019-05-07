@@ -38,15 +38,21 @@ def eigen_imgs(eigen_vecs, eig_nums, i_dim,j_dim):
     plot_num = len(eig_nums)
     fig_row = int((plot_num+3)/4)
     fig=plt.figure(figsize=(15, fig_row*3))
-    plt.title('Eigen Images', fontsize=18, weight='bold')
+    
     count = 1
     for i in eig_nums:
         plot=fig.add_subplot(fig_row, 4, count)
         count = count+1
-        plt.imshow(eigen_vecs[:,i-1].reshape(j_dim,i_dim), cmap='jet',extent=[0,50000,0,25000])       
+        plt.imshow(eigen_vecs[:,i-1].reshape(j_dim,i_dim), cmap='jet')       
         plt.xticks(fontsize = 13)
         plt.yticks(fontsize = 13)
-        plot.set_xlabel('eigen img of PC' + str(i), fontsize = 14)
+        plt.title('model eigen_img (PC' + str(i) +')', fontsize = 14)
     plt.subplots_adjust(top=0.55, bottom=0.08, left=0.10, right=0.95, hspace=0.15,
                     wspace=0.35)
+    
+    #t = (" ")
+    #plt.figure(figsize=(3, 0.1))
+    #plt.text(0, 0, t, style='normal', ha='center', fontsize=16, weight = 'bold')
+    #plt.setp(plt.gca(), frame_on=False, xticks=(), yticks=())
+    #plt.show()
     return

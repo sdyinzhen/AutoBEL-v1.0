@@ -67,14 +67,14 @@ def post_est_rtn_val(cca_comp, h_c,d_c, d_obs_c, c_dd_star, fig_ind):
     return h_c_post
 
 	
-# function post_est_clsplt returns the cluster plot of posteriors. 
-### cca_complist - the list contains the number of canonical components for posterior estimation
-### h_c, d_c, d_obs_c- The　array of cca scores of h, d, and d_obs
-###  pic_row, pic_col: the total row and column number of the figures. 
-def post_est_clsplt(cca_complist, h_c, d_c, d_obs_c, c_dd_star, pic_row, pic_col):
 
-    fig = plt.figure( figsize=(4*pic_col, 4*pic_row))
-    plt.title('Parametric Gaussian Regression & posterior sampling', fontsize=18, loc='left', weight='bold')	
+def post_est_clsplt(cca_complist, h_c, d_c, d_obs_c, c_dd_star, pic_row, pic_col):
+    '''function post_est_clsplt returns the cluster plot of posteriors. 
+        cca_complist - the list contains the number of canonical components for posterior estimation
+        h_c, d_c, d_obs_c- The　array of cca scores of h, d, and d_obs
+        pic_row, pic_col: the total row and column number of the figures. '''
+    fig = plt.figure( figsize=(4*pic_col, 4.5*pic_row))
+    #plt.title('Parametric Gaussian Regression & posterior sampling', fontsize=18, loc='left', weight='bold')	
     count = 1
     for com in cca_complist:     
         #### Estimate f(h*) of priors
@@ -112,7 +112,10 @@ def post_est_clsplt(cca_complist, h_c, d_c, d_obs_c, c_dd_star, pic_row, pic_col
 
         ax2.plot(bins, 1/(std_post * np.sqrt(2 * np.pi))*np.exp( - (bins - mean_post)**2 / (2 * std_post**2) ), linewidth=2, color='red')
 
-        ax1.set_xlabel('h (CCA component '+ str(com) +')',fontsize = 14)
+        ax1.set_xlabel('m (CCA component '+ str(com) +')',fontsize = 14)
+        ax1.set_ylabel('Count',fontsize = 14)
+        plt.setp(plt.gca(), frame_on=False, yticks=())
+        plt.title('posterior vs prior model', fontsize=14, style='italic', weight='bold')
         count = count +1
     
     plt.subplots_adjust(top=0.75, bottom=0.08, left=0.10, right=0.95, hspace=0.40,

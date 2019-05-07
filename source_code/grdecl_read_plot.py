@@ -50,52 +50,55 @@ def grdecl_read(file_name, i_dim, j_dim, k_dim):
     return grid_data
 	
 	
-
-def grdecl_plot(file_pre, first_realnum, last_realnum, pstep, layernum, pro_type):
-    plot_num = int((last_realnum-first_realnum+1)/pstep)    
-    fig_row = int((plot_num+3)/4)
-    fig=plt.figure(figsize=(fig_row*6,16))
-    plt.title('Prior samples', fontsize=18, weight='bold')
+def grdecl_plot(file_pre, i_dim, j_dim, k_dim, layernum, pro_type):
+    fig=plt.figure(figsize=(15,14))
     count = 1
     if pro_type == 'facies':
         
-        for realnum in tqdm(range(first_realnum, last_realnum, pstep)):
+        for realnum in tqdm(range(12)):
             grid_data = grdecl_read(file_pre + str(realnum+1) + '.GRDECL',200,100,75)        
-            plot=fig.add_subplot(fig_row, 4, count)
+            plot=fig.add_subplot(3, 4, count)
             count = count+1
-            #plot=fig.add_subplot(3,plot_num/3,count)
-            #prop_mean = format((1-np.mean(grid_data)/3-0.01)*100,'.2f')
-            #plot.set_xlabel('Sand Fraction = ' + str(prop_mean)+'%', fontsize = 14)
-            #plt.imshow(grid_data,cmap='viridis_r',extent=[0,2500,0,2500]) # for facies
             prop_mean = format(np.mean(grid_data),'.4f')
-            plt.imshow(grid_data[:][:][layernum],cmap='viridis_r',extent=[0,50000,0,25000]) # for poro
+            plt.imshow(grid_data[:][:][layernum],cmap='viridis_r') # for poro
             plt.xticks(fontsize = 13)
             plt.yticks(fontsize = 13)
-            #plot.set_xlabel('whole field fac mean= ' + str(prop_mean), fontsize = 14)
+            plt.title('prior model sample #'+str(count-1), fontsize=14, style='italic')
             plot.set_xlabel('Realization No. ' + str(realnum), fontsize = 14)
        
     else:
-        for realnum in tqdm(range(first_realnum, last_realnum, pstep)):
+        for realnum in tqdm(range(12)):
             grid_data = grdecl_read(file_pre + str(realnum+1) + '.GRDECL',200,100,75)         
-            plot=fig.add_subplot(fig_row, 4, count)
+            plot=fig.add_subplot(3, 4, count)
             count = count+1
-            #plot=fig.add_subplot(3,plot_num/3,count)
+
             prop_mean = format(np.mean(grid_data),'.4f')
             plot.set_xlabel('whole field "' + pro_type + '" = ' + str(prop_mean), fontsize = 14)
-            #plt.imshow(grid_data,cmap='viridis_r',extent=[0,2500,0,2500]) # for facies
+            c_max = np.max(grid_data[layernum])*1.05
+            c_min = np.min(grid_data[layernum])
+
             if pro_type == 'Sw':
-                plt.imshow(grid_data[layernum],cmap='jet_r',extent=[0,50000,0,25000], \
-                           vmin=np.min(grid_data[layernum]),vmax=np.max(grid_data[layernum])*1.05)
+                plt.imshow(grid_data[layernum],cmap='jet_r', \
+                           vmin=c_min,vmax=c_max )
             else:
-                plt.imshow(grid_data[layernum],cmap='jet',extent=[0,50000,0,25000], \
-                           vmin=np.min(grid_data[layernum]),vmax=np.max(grid_data[layernum])*1.05)                
+                plt.imshow(grid_data[layernum],cmap='jet', \
+                           vmin=c_min,vmax=c_max*1.05)                
             plt.xticks(fontsize = 13)
             plt.yticks(fontsize = 13)
-            #print(realnum)
-    plt.colorbar(fraction = 0.02)	
+            plt.title('prior model sample #'+str(count-1), fontsize=14, style='italic')
+
+#             plt.colorbar(fraction = 0.02)
+            plt.colorbar(fraction = 0.02, ticks=np.around([c_min*1.1, c_max], decimals=1))
     plt.subplots_adjust(top=0.55, bottom=0.08, left=0.10, right=0.95, hspace=0.15,
                     wspace=0.35)
-					
+
+	
+    #t = ("Prior model samples")
+	#plt.figure(figsize=(3, 0.1))
+    #plt.text(0, 0, t, style='normal', ha='center', fontsize=16, weight = 'bold')
+    #plt.setp(plt.gca(), frame_on=False, xticks=(), yticks=())
+    #plt.show()
+	
 
 def grdecl_col_plot(file_pre, first_realnum, last_realnum, pstep, colnum, pro_type):
     plot_num = int((last_realnum-first_realnum+1)/pstep)    

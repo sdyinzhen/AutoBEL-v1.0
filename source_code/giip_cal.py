@@ -33,13 +33,18 @@ def GIIP_cal(m_poro, m_sw, m_thc_coef, bulk_vol, plt_flg):
         plt.yticks(fontsize = 18, fontname='calibri') 
         plt.ylabel('count', fontsize = 20, fontname='calibri', weight ='bold')
         plt.xlabel('GIIP', fontsize = 20, fontname='calibri', weight ='bold')
-        plt.title('Prior prediction', fontsize=18, loc='left', weight='bold')
+        plt.title('Prior GIIP prediction', fontsize=18, loc='left', style='italic')
         ax2 = ax1.twinx()
         kde = stats.gaussian_kde(GIIP)
         xx = np.linspace(GIIP.min()*0.95, GIIP.max()*1.05, 1000) 
         ax2.plot(xx, kde(xx), '--', linewidth = 2, c='red')
         fig.tight_layout()     
     
+    #t = (" ")
+    #plt.figure(figsize=(3, 0.1))
+    #plt.text(0, 0, t, style='normal', ha='center', fontsize=16, weight = 'bold')
+    #plt.setp(plt.gca(), frame_on=False, xticks=(), yticks=())
+    #plt.show()
     return GIIP
 	
 
@@ -53,4 +58,7 @@ def giip_compare(giip_a, giip_b):
     sns.distplot(giip_b, bins=int(len(giip_b)/12.5), \
                 kde_kws={'linewidth': 3,  "color":"red", }, \
                 hist_kws={'color':'tomato',"edgecolor":'black','linewidth':0.6, 'alpha':0.7})
+    plt.ylabel('Density', fontsize = 20, fontname='calibri')
+    plt.xlabel('GIIP', fontsize = 20, fontname='calibri')
+    plt.title('Posterior and Prior GIIP predicton', fontsize=18, loc='center', style='italic')
     return

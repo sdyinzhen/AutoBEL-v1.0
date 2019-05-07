@@ -1,20 +1,24 @@
 ## MD_flsification(d_var, d_obs, plt_OrNot, Q_quantile)
 ## Author: David Yin 
 ## Contact: yinzhen@stanford.edu
-## Date: Oct 29, 2018
+## Date: April 29, 2019
 
-## This function falsifies the prior using Robust Mahalanobis Distance RMD.  
-## d_var: the data variable, (nXp)
-## d_obs: the data observation variable, (1xp)
-## plt_OrNot: True or False, to create the distribution plot of the calculated RMDs. 
-## Q_quantile：the Q_quantile of the RMD distribution, 95 or 97.5 is suggested
-## example: MD_flsification(d_pri, d_obs, True, 95) will produce the RMD_obs, RMD_pri, RMD_Q95, and plot them. 
 
 from sklearn.covariance import MinCovDet as MCD
 from scipy import stats
 import numpy as np
 import matplotlib.pyplot as plt
 def RobustMD_flsification(d_var, d_obs, plt_OrNot, Q_quantile):
+    
+    '''
+    This function falsifies the prior using Robust Mahalanobis Distance RMD.  
+    d_var: the data variable, (nXp)
+    d_obs: the data observation variable, (1xp)
+    plt_OrNot: True or False, to create the distribution plot of the calculated RMDs. 
+    Q_quantile：the Q_quantile of the RMD distribution, 95 or 97.5 is suggested
+    example: MD_flsification(d_pri, d_obs, True, 95) will produce the RMD_obs, RMD_pri, RMD_Q95, and plot them. 
+    '''
+    
     mcd = MCD(random_state=0).fit(d_var)
     new_obs = d_obs-mcd.location_
     md_obs= np.sqrt(new_obs.dot(np.linalg.inv(mcd.covariance_)).dot(new_obs.T))
@@ -25,7 +29,8 @@ def RobustMD_flsification(d_var, d_obs, plt_OrNot, Q_quantile):
         md_samp = np.sqrt(sample.dot(np.linalg.inv(mcd.covariance_)).dot(sample.T))[0,0]
         md_samples.append(md_samp)
     md_samples = np.asarray(md_samples)
-    print(str(Q_quantile)+'th Quantile of Robust Mahalanobis Distance is',           stats.scoreatpercentile(md_samples, Q_quantile).round(decimals=3))
+    print(str(Q_quantile)+'th Quantile of Robust Mahalanobis Distance is', \
+          stats.scoreatpercentile(md_samples, Q_quantile).round(decimals=3))
 
     if plt_OrNot == True:
         plt.figure(figsize=(6,5))
@@ -37,5 +42,6 @@ def RobustMD_flsification(d_var, d_obs, plt_OrNot, Q_quantile):
         plt.hlines(y=stats.scoreatpercentile(md_samples, Q_quantile), xmin= -10, xmax=259, colors='red', linewidths=2, linestyles='--')
         cbar = plt.colorbar(fraction=0.035)
         cbar.ax.set_ylabel('RMD')
-        plt.title('Prior falsification', fontsize=18, loc='left', weight='bold')
-
+        plt.title('Prior falsification using Robust Mahalanobis Distance outlier dectection', fontsize=18, loc='left', style='italic')
+    
+    return md_obs[0,0].round(decimals = 3), stats.scoreatpercentile(md_samples, Q_quantile).round(decimals=3)

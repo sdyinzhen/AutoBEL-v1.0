@@ -21,7 +21,7 @@ from sklearn.cross_decomposition import CCA
 ## d_var: the array of data variable
 ## components_num: the number of canonical components. 
 def cca_d_h(d_var, h_var, components_num):
-	cca=CCA(n_components=components_num, scale=True)
+	cca=CCA(n_components=components_num, scale=True, max_iter=2000)
 	cca.fit(d_var, h_var)
 	d_c,h_c=cca.transform(d_var, h_var)  
 	ah = np.linalg.inv((h_var.T).dot(h_var)).dot(h_var.T).dot(h_c)

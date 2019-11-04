@@ -16,6 +16,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from tqdm import tqdm
+import warnings
+warnings.filterwarnings("ignore")
 class SeabornFig2Grid():
 
     def __init__(self, seaborngrid, fig,  subplot_spec):

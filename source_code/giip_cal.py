@@ -11,7 +11,7 @@ sys.path.insert(0, 'source_code/')
 from grdecl_read_plot import *
 import seaborn as sns
 
-def GIIP_cal(m_poro, m_sw, m_thc_coef, bulk_vol, plt_flg):
+def GIIP_cal(m_poro, m_sw, m_thc, grid_h_resolution, plt_flg):
     '''
     This is the function for the calculation of GIIP
     arg:
@@ -21,9 +21,9 @@ def GIIP_cal(m_poro, m_sw, m_thc_coef, bulk_vol, plt_flg):
         bulk_vol: the grdecl file of reservoir bulk volume per cell.
     '''
     
-    bulk_vol = grdecl_read(bulk_vol,200,100,75)[0].flatten()    
+    bulk_vol = m_thc*grid_h_resolution
     sg = 1-m_sw
-    GIIP = (bulk_vol*m_poro*m_thc_coef*sg).sum(axis=1)/0.6767
+    GIIP = (bulk_vol*m_poro*sg).sum(axis=1)/0.6767
 
     GIIP = np.array(GIIP)
     if plt_flg == True:
@@ -48,9 +48,10 @@ def GIIP_cal(m_poro, m_sw, m_thc_coef, bulk_vol, plt_flg):
     return GIIP
 	
 
-def giip_compare(giip_a, giip_b):
-    sns.set(style="white",palette='deep', font_scale=1.9)
-    plt.subplots(figsize=(8,4.5))
+
+def giip_compare(giip_a, giip_b, model_name):
+#     sns.set(style="white",palette='deep', font_scale=1.9)
+    plt.subplots(figsize=(9,4.5))
     sns.distplot(giip_a, bins=int(len(giip_a)/10), \
                 kde_kws={'linewidth': 2,"color":"blue"}, \
                 hist_kws={'color':'aqua',"edgecolor":'black','linewidth':0.6,'alpha':0.95})
@@ -60,5 +61,5 @@ def giip_compare(giip_a, giip_b):
                 hist_kws={'color':'tomato',"edgecolor":'black','linewidth':0.6, 'alpha':0.7})
     plt.ylabel('Density', fontsize = 20, fontname='calibri')
     plt.xlabel('GIIP', fontsize = 20, fontname='calibri')
-    plt.title('Posterior and Prior GIIP predicton', fontsize=18, loc='center', style='italic')
+    plt.title('Posterior and Prior predicton with "' + model_name+ '" model', fontsize=18, loc='right', style='italic')
     return

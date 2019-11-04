@@ -8,12 +8,13 @@ from sklearn.covariance import MinCovDet as MCD
 from scipy import stats
 import numpy as np
 import matplotlib.pyplot as plt
-def RobustMD_flsification(d_var, d_obs, plt_OrNot, Q_quantile):
+def RobustMD_flsification(d_var, d_obs, prior_name, plt_OrNot, Q_quantile):
     
     '''
     This function falsifies the prior using Robust Mahalanobis Distance RMD.  
     d_var: the data variable, (nXp)
     d_obs: the data observation variable, (1xp)
+    prior_name: name of the prior model for falsification, string
     plt_OrNot: True or False, to create the distribution plot of the calculated RMDs. 
     Q_quantile：the Q_quantile of the RMD distribution, 95 or 97.5 is suggested
     example: MD_flsification(d_pri, d_obs, True, 95) will produce the RMD_obs, RMD_pri, RMD_Q95, and plot them. 
@@ -42,6 +43,7 @@ def RobustMD_flsification(d_var, d_obs, plt_OrNot, Q_quantile):
         plt.hlines(y=stats.scoreatpercentile(md_samples, Q_quantile), xmin= -10, xmax=259, colors='red', linewidths=2, linestyles='--')
         cbar = plt.colorbar(fraction=0.035)
         cbar.ax.set_ylabel('RMD')
-        plt.title('Prior falsification using Robust Mahalanobis Distance outlier dectection', fontsize=18, loc='left', style='italic')
+        plt.title('Prior falsification of "'+ prior_name+'" using Robust Mahalanobis Distance', \
+                  fontsize=18, loc='left', style='italic')
     
     return md_obs[0,0].round(decimals = 3), stats.scoreatpercentile(md_samples, Q_quantile).round(decimals=3)

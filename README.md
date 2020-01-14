@@ -27,5 +27,8 @@ Once installed, jupyter can be started from the command line with
 ### Tutorial Video
 For illustration, a [tutorial video](https://youtu.be/_jh6GbW15ck) is provided. 
 
+### NB
+The current AutoBEL tutorial is for uncertainty quantification of continous models. We are still working to make the catergoricial faices model data publicly available. owever, all the codes for facies model management are provided in the repository, including signed distances calculations and back transform (“signed_distance_functions.py”), mixed PCA (“dmat_4mixpca.py”). The tutorial will be updated as soon as the facies model becomes available. 
+
 ### Licensing
 This repository is released under the MIT License.

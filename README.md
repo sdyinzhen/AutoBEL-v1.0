@@ -25,7 +25,7 @@ Once installed, jupyter can be started from the command line with
 4. Open the jupyter notebook file [Control_Pannel.ipynb](https://github.com/sdyinzhen/AutoBEL_Python/blob/master/Control_Pannel.ipynb), and follow the steps in the notebook to run BEL. 
 
 ### Tutorial Video
-For illustration, a [tutorial video](https://youtu.be/_jh6GbW15ck) is provided. 
+For illustration, a [tutorial video](https://youtu.be/9dP1jCvMOXo) is provided. 
 
 ### NB
 The current AutoBEL tutorial is for uncertainty quantification of continous models. We are still working to make the catergoricial faices model data publicly available. However, all the codes for facies model management are provided in the repository, including signed distances calculations and back transform (“signed_distance_functions.py”), mixed PCA (“dmat_4mixpca.py”). The tutorial will be updated as soon as the facies model becomes available. 

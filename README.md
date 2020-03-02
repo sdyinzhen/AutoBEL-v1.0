@@ -1,7 +1,8 @@
 # Automated Bayesian Evidential Learning for Geological UQ 
 
+<p> This is companion code repository for Yin, Z., Strebelle, S., and Caers, J.: Automated Monte Carlo-based quantification and updating of geological uncertainty with borehole data (AutoBEL v1.0), Geosci. Model Dev., 13, 651–672, https://www.geosci-model-dev.net/13/651/2020/gmd-13-651-2020.html 
 <p> This repository contains the python code of automated BEL for geological model unceratinty quantification using well borehole data.
-
+	
 ### Installation
 
 To run the Auto-BEL, the following dependencies must be met:
